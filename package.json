@@ -1,7 +1,7 @@
 {
   "name": "swag_labs",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a Cypress Automation project using the website: https://www.saucedemo.com/",
   "main": "index.js",
   "scripts": {
     "test": "cypress run"
@@ -11,5 +11,13 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.6.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luancsn14/swaglabs-cypress-automation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Luancsn14/swaglabs-cypress-automation/issues"
+  },
+  "homepage": "https://github.com/Luancsn14/swaglabs-cypress-automation#readme"
 }
