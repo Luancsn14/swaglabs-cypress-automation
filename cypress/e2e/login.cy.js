@@ -1,10 +1,7 @@
 describe('Login', () => {
-    it('Successfully', () => {
-      const user = Cypress.env('standard_user')
-      const password = Cypress.env('user_password')
-  
-      cy.login(user, password)
-  
+    it('Successfully', () => {  
+      cy.login()
+
       cy.url().should('be.equal', `${Cypress.config('baseUrl')}/inventory.html`)
     })
 
@@ -12,7 +9,16 @@ describe('Login', () => {
       const user = Cypress.env('locked_out_user')
       const password = Cypress.env('user_password')
   
-      cy.login(user, password)
+      cy.visit('/')
+
+      cy.get('#user-name')
+        .type(user)
+
+      cy.get('#password')
+        .type(password, { log:false })
+
+      cy.get('#login-button')
+       .click()
   
       cy.get('[data-test="error"]')
         .should('contain', 'Epic sadface: Sorry, this user has been locked out.')
@@ -22,7 +28,16 @@ describe('Login', () => {
       const user = 'user'
       const password = '123'
   
-      cy.login(user, password)
+      cy.visit('/')
+
+      cy.get('#user-name')
+        .type(user)
+
+      cy.get('#password')
+        .type(password, { log:false })
+
+      cy.get('#login-button')
+       .click()
   
       cy.get('[data-test="error"]')
         .should('contain', 'Epic sadface: Username and password do not match any user in this service')
