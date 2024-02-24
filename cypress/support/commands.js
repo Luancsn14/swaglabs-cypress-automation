@@ -21,10 +21,29 @@ Cypress.Commands.add('logout', () => {
     .click()
  })
 
-Cypress.Commands.add('includeItemToCart', () => {     
+Cypress.Commands.add('includeOneItemToCart', () => {     
   cy.get('#shopping_cart_container')
     .should('not.have.class', 'shopping_cart_badge')
 
-  cy.get('#add-to-cart-sauce-labs-backpack')
+  .get('.inventory_list .btn')
+    .contains('Add to cart')
+    .first()
     .click()
  })
+
+ Cypress.Commands.add('includeAllItemsToCart', () => {     
+  cy.get('#shopping_cart_container')
+    .should('not.have.class', 'shopping_cart_badge')
+
+  cy.get('.inventory_list .btn')
+    .click({ multiple: true })
+ })
+
+ Cypress.Commands.add('removeItemsFromCart', () => {     
+  cy.get('.inventory_list .btn')
+    .should('contain', 'Remove')
+    .click({ multiple: true })
+ })
+
+
+ 
