@@ -32,5 +32,45 @@ describe('Products', () => {
      
       cy.get('.shopping_cart_badge')
         .should('contain', '6') 
-  })
+    })
+
+    it('Sort items by Name (A to Z)', () => {
+      cy.get('select.product_sort_container')
+        .select('az')
+
+      cy.get('.active_option')
+        .should('have.text', 'Name (A to Z)')
+
+      cy.validateAscendingOrder('.inventory_item_name')
+    })
+
+    it('Sort items by Name (Z to A)', () => {
+      cy.get('select.product_sort_container')
+        .select('za')
+      
+      cy.get('.active_option')
+        .should('have.text', 'Name (Z to A)')
+
+      cy.validateDescendingOrder('.inventory_item_name')
+    })
+
+    it('Sort items by Price (low to high)', () => {
+      cy.get('select.product_sort_container')
+        .select('lohi')
+      
+      cy.get('.active_option')
+        .should('have.text', 'Price (low to high)')
+
+      cy.validateAscendingOrder('.inventory_item_price')
+    })
+
+    it('Sort items by Price (high to low)', () => {
+      cy.get('select.product_sort_container')
+        .select('hilo')
+      
+      cy.get('.active_option')
+        .should('have.text', 'Price (high to low)')
+
+      cy.validateDescendingOrder('.inventory_item_price')
+    })
 })
