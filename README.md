@@ -5,7 +5,12 @@ This is a Cypress Automation project using the website: https://www.saucedemo.co
 To run this project use the following commands:
 
 ```shell
--- npm install
--- npx cypress run // to run all tests headlessly
--- npx cypress open // to open cypress and choose browser and spec to run the tests
+// install dependencies
+-- npm install 
+
+// run all tests headlessly
+-- npx cypress run 
+
+// open cypress and choose browser and spec to run the tests
+-- npx cypress open 
 ```  

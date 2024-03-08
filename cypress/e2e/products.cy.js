@@ -2,6 +2,7 @@ describe('Products', () => {
     beforeEach(() => {
         cy.login()
     })
+    
     it('Check product details', () => {
         cy.get('#item_4_title_link')
           .click()

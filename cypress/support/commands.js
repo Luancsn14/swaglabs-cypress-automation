@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker'
+
 Cypress.Commands.add('login', () => {
   const user = Cypress.env('standard_user')
   const password = Cypress.env('user_password')
@@ -64,6 +66,45 @@ Cypress.Commands.add('validateDescendingOrder', (orderedBy) => {
       cy.wrap(elements[i])
         .should('have.text', sortedItems[i]);
     }
+  });
+})
+
+Cypress.Commands.add('checkout', () => {
+  cy.get('#checkout')
+    .click()
+      
+  cy.get('[data-test="firstName"]')
+    .type(faker.person.firstName())
+  cy.get('[data-test="lastName"]')
+    .type(faker.person.lastName())
+  cy.get('[data-test="postalCode"]')
+    .type(faker.location.zipCode())
+    
+  cy.get('#continue')
+    .click()
+})
+
+Cypress.Commands.add('validatePrices', () => {
+  cy.get('.inventory_item_price').then((elements) => {
+    const prices = Cypress._.map(elements, "innerText");
+    var price = 0;
+
+    for (let i = 0; i < elements.length; i++) {
+      price += parseFloat(prices[i].replace('$', ''));          
+    }
+
+    const tax = (price * 0.08).toFixed(2);
+
+    const total = price + parseFloat(tax);
+
+    cy.get('.summary_subtotal_label')
+      .should('have.text', `Item total: $${price}`)
+
+    cy.get('.summary_tax_label')
+      .should('have.text', `Tax: $${tax}`)
+
+    cy.get('.summary_total_label')
+      .should('have.text', `Total: $${total}`)
   });
 })
 
